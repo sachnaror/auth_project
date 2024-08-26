@@ -1,15 +1,9 @@
-# Your serializers code here
-from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-User = get_user_model()
+from .models import CustomUser
 
-class UserSerializer(serializers.ModelSerializer):
+
+class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['username', 'password']
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+        model = CustomUser
+        fields = ['id', 'username', 'groups', 'user_permissions']

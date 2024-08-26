@@ -1,8 +1,10 @@
-# Your urls configuration here
-from django.urls import path
+from auth_app.views import CustomUserViewSet
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
-from .views import RegisterView
+router = DefaultRouter()
+router.register(r'users', CustomUserViewSet)
 
 urlpatterns = [
-    path('register/', RegisterView.as_view(), name='register'),
+    path('api/', include(router.urls)),
 ]
