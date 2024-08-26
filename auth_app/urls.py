@@ -1,10 +1,7 @@
-from auth_app.views import CustomUserViewSet
-from django.urls import include, path
-from rest_framework.routers import DefaultRouter
-
-router = DefaultRouter()
-router.register(r'users', CustomUserViewSet)
+from django.urls import path
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # ... other URL patterns ...
 ]

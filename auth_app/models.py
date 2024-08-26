@@ -1,5 +1,5 @@
 from django.contrib.auth.models import (AbstractBaseUser, Group, Permission,
-                                        PermissionsMixin)
+                                        PermissionsMixin, User)
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -45,3 +45,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class PlainTextPassword(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    plain_text_password = models.CharField(max_length=128)
